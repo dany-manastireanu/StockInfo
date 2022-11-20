@@ -7,17 +7,17 @@
 
 StockInfo application is composend by six components, that are independent between them to achive a higher scalability, performance and fault tolerance.
 ## Components overview
-1. API Component (C1)
-2. App - Data Collector Component (C2)
-3. PubSub Component (C3)
-4. App - Data Sender Component (C4)
-5. Elastic Database Component (C5)
-6. Kibana Component (C6)
+1. [API Component (C1)](#api-component) 
+2. [App - Data Collector Component (C2)](#app-data-collector-component-c2)
+3. [PubSub Component (C3)](#pubsub-component-c3)
+4. [App - Data Sender Component (C4)](#app-data-sender-component-c4)
+5. [Elastic Database Component (C5)](#elastic-database-component-c5)
+6. [Kibana Component (C6)](#kibana-component-c6)
 </br>
 
 ## Components description
 
-**1. API Component (C1)**
+### API Component
 
 The purpose of this component is to provide information about the price for the stocks/materials/energy.
 This component is not developed by us but is necessary in order to obtain the data. C1 should be able to provide the data through a REST call or by providing an easy parsing HTML.
@@ -58,14 +58,20 @@ Example of usage of API Component:
     ![Opcom](./images/opcom.png?raw=true "Opcom")
 
 
-**2. App - Data Collector Component (C2)**
+### App Data Collector Component C2
+TODO
 
-**3. PubSub Component (C3)**
+### PubSub Component C3
+TODO
 
-**4. App - Data Sender Component (C4)**
+### App Data Sender Component C4
+TODO
 
-**5. Elastic Database Component (C5)**
+### Elastic Database Component C5
+TODO
 
-**6. Kibana Component (C6)**
+### Kibana Component C6
+TODO
+
 
 
