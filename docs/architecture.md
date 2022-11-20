@@ -14,6 +14,7 @@ StockInfo application is composend by six components, that are independent betwe
 5. Elastic Database Component (C5)
 6. Kibana Component (C6)
 </br>
+
 ## Components description
 1. **API Component (C1)**
 The purpose of this component is to provide information about the price for the stocks/materials/energy.
