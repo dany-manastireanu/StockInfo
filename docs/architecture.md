@@ -16,7 +16,7 @@ StockInfo application is composend by six components, that are independent betwe
 </br>
 
 ## Components description
-1. **API Component (C1)**
+**1. API Component (C1)**
 The purpose of this component is to provide information about the price for the stocks/materials/energy.
 This component is not developed by us but is necessary in order to obtain the data. C1 should be able to provide the data through a REST call or by providing an easy parsing HTML.
 Example of usage of API Component: 
@@ -54,4 +54,11 @@ Example of usage of API Component:
     url: `https://www.opcom.ro/opcom/rapoarte/pzu/RaportMarketResults.php?lang=ro`
 
     ![Opcom](./images/opcom.png?raw=true "Opcom")
+
+
+**2. App - Data Collector Component (C2)**
+**3. PubSub Component (C3)**
+**4. App - Data Sender Component (C4)**
+**5. Elastic Database Component (C5)**
+**6. Kibana Component (C6)**
 
