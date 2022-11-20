@@ -85,7 +85,7 @@ Because we rely on [PubSub](#pubsub-component-c3) we can have multiple C4 applic
 The Elastic Database will be our No Sql database for storing, searching and analyzing our large volumes of data in near-real-time.
 
 ### Kibana Component C6
-The Kibana Component is our solution for visialization the data which is from [Elastic Database](#elastic-database-component-c5)
+The Kibana Component is our solution for the data visialization. The data comes from [Elastic Database](#elastic-database-component-c5)
 
 
 
