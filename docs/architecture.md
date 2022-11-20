@@ -59,19 +59,33 @@ Example of usage of API Component:
 
 
 ### App Data Collector Component C2
-TODO
+App Data Collector Component will be a microservice written in any programming language with the scope of collecting data and submitting this data to [C3](#pubsub-component-c3).
+This component should be able to do REST requests or parse the data from [C1](#api-component). After the data is obtained from [C1](#api-component), App Data Collector Component will send the data to PubSub service which is the third component.
+We can have any number of C2 microservices with different purposes for collecting the data, for example, one microservice can collect the data by doing a rest call to an API and another microservice can parse an HTML page.
+Both microservices will be able to send the data in the time and can scale to any number.
 
 ### PubSub Component C3
-TODO
+PubSub Component will be a service in the cloud to assure decoupling between [App Data Collector](#app-data-collector-component-c2) and [App Data Sender](#app-data-sender-component-c4). This service will provide asynchronous communication between [C2](#app-data-collector-component-c2) and [C4](#app-data-sender-component-c4).
 
+Message format:
+
+```json
+{
+    "category": "string-value",
+    "name": "string-value",
+    "date": "date-value",
+    "price": "double-value"
+}
+```
 ### App Data Sender Component C4
-TODO
+The App Data Sender Component is a microservice which listen for messages from [PubSub Component](#pubsub-component-c3).
+Because we rely on [PubSub](#pubsub-component-c3) we can have multiple C4 applications in cloud to listen for messages with different categories and also we can increase the number of instances for the same microservice to increase the performance and redunce in case of any failure.
 
 ### Elastic Database Component C5
-TODO
+The Elastic Database will be our No Sql database for storing, searching and analyzing our large volumes of data in near-real-time.
 
 ### Kibana Component C6
-TODO
+The Kibana Component is our solution for visialization the data which is from [Elastic Database](#elastic-database-component-c5)
 
 
 
