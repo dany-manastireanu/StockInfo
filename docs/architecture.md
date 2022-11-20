@@ -5,7 +5,7 @@
 
 </br></br>
 
-StockInfo application is composend by six components, that are independent between them to achive a higher scalability, performance and fault tolerance.
+StockInfo application is composed of six components, that are independent between them to achieve higher scalability, performance, and fault tolerance.
 ## Components overview
 1. [API Component (C1)](#api-component) 
 2. [App - Data Collector Component (C2)](#app-data-collector-component-c2)
