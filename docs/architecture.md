@@ -17,7 +17,7 @@ StockInfo application is composed of six components, that are independent betwee
 
 ## Components description
 
-### API Component
+### API Component C1
 
 The purpose of this component is to provide information about the price for the stocks/materials/energy.
 This component is not developed by us but is necessary in order to obtain the data. C1 should be able to provide the data through a REST call or by providing an easy parsing HTML.
@@ -32,20 +32,20 @@ Example of usage of API Component:
 
     ```json
     {
-                .........................
-                "hasMiniOptions": false,
-                    "quote": {
-                        "region": "US",
-                        "currency": "USD",
-                        "shortName": "Microsoft Corporation",
-                        "longName": "Microsoft Corporation",
-                        "exchangeTimezoneName": "America/New_York",
-                        "regularMarketPrice": 241.22,
-                        "regularMarketDayHigh": 243.74,
-                        "regularMarketDayRange": "239.03 - 243.74",
-                        "regularMarketDayLow": 239.03,
-                        "regularMarketVolume": 27613523,
-                .....................
+        ...
+        "hasMiniOptions": false,
+            "quote": {
+                "region": "US",
+                "currency": "USD",
+                "shortName": "Microsoft Corporation",
+                "longName": "Microsoft Corporation",
+                "exchangeTimezoneName": "America/New_York",
+                "regularMarketPrice": 241.22,
+                "regularMarketDayHigh": 243.74,
+                "regularMarketDayRange": "239.03 - 243.74",
+                "regularMarketDayLow": 239.03,
+                "regularMarketVolume": 27613523,
+        ...
     }
     ```
 
@@ -53,7 +53,7 @@ Example of usage of API Component:
 
     For this data resource, we will rely on creating a parser for the HTML page. The data obtained from this website are in a table and a chart.
 
-    url: `https://www.opcom.ro/opcom/rapoarte/pzu/RaportMarketResults.php?lang=ro`
+    url: [Opcom price energy](https://www.opcom.ro/opcom/rapoarte/pzu/RaportMarketResults.php?lang=ro)
 
     ![Opcom](./images/opcom.png?raw=true "Opcom")
 
@@ -65,7 +65,15 @@ We can have any number of C2 microservices with different purposes for collectin
 Both microservices will be able to send the data in the time and can scale to any number.
 
 ### PubSub Component C3
-PubSub Component will be a service in the cloud to assure decoupling between [App Data Collector](#app-data-collector-component-c2) and [App Data Sender](#app-data-sender-component-c4). This service will provide asynchronous communication between [C2](#app-data-collector-component-c2) and [C4](#app-data-sender-component-c4).
+PubSub Component will be a service in the cloud to assure decoupling between [App Data Collector](#app-data-collector-component-c2) and [App Data Sender](#app-data-sender-component-c4). This service will provide asynchronous communication between [C2](#app-data-collector-component-c2) and [C4](#app-data-sender-component-c4). For the actual implementation of PubSub we will use the Azure Web PubSub service from Microsoft. A key benefit of using queues is to achieve temporal decoupling of application components. In other words, the producers (senders) and consumers (receivers) don't have to send and receive messages at the same time. That's because messages are stored durably in the queue. Furthermore, the producer doesn't have to wait for a reply from the consumer to continue to process and send messages.
+
+![PubSub](./images/pub-sub.png?raw=true "PubSub")
+
+**Subscriber**: The subscriber is the *Receiver* from the above picture. The role of subscriber is to read messages about stock info from the *Message Queue*.
+Actual implementation:
+- The client will connect to the Azure Web PubSub service through the standard WebSocket protocol using JSON Web Token (JWT) authentication. We need to create a WebSocket connection to connect to a hub in Azure Web PubSub. Hub is a logical unit in Azure Web PubSub where you can publish messages to a group of clients.
+
+**Publisher**: The publisher is the Sender from the above picture. The role of the publisher is to send messages related to the stock info into *Message Queue*.
 
 Message format:
 
