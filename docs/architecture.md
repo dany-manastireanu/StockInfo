@@ -70,10 +70,11 @@ PubSub Component will be a service in the cloud to assure decoupling between [Ap
 ![PubSub](./images/pub-sub.png?raw=true "PubSub")
 
 **Subscriber**: The subscriber is the *Receiver* from the above picture. The role of subscriber is to read messages about stock info from the *Message Queue*.
-Actual implementation:
-- The client will connect to the Azure Web PubSub service through the standard WebSocket protocol using JSON Web Token (JWT) authentication. We need to create a WebSocket connection to connect to a hub in Azure Web PubSub. Hub is a logical unit in Azure Web PubSub where you can publish messages to a group of clients.
 
 **Publisher**: The publisher is the Sender from the above picture. The role of the publisher is to send messages related to the stock info into *Message Queue*.
+
+Actual implementation:
+- The client will connect to the Azure Web PubSub service through the standard WebSocket protocol using JSON Web Token (JWT) authentication. We need to create a WebSocket connection to connect to a hub in Azure Web PubSub. Hub is a logical unit in Azure Web PubSub where you can publish messages to a group of clients.
 
 Message format:
 
@@ -87,13 +88,16 @@ Message format:
 ```
 ### App Data Sender Component C4
 The App Data Sender Component is a microservice which listen for messages from [PubSub Component](#pubsub-component-c3).
-Because we rely on [PubSub](#pubsub-component-c3) we can have multiple C4 applications in cloud to listen for messages with different categories and also we can increase the number of instances for the same microservice to increase the performance and redunce in case of any failure.
+Because we rely on [PubSub](#pubsub-component-c3) we can have multiple C4 applications in cloud to listen for messages. The purpose of this microservice is to get he messages related to the stock information from *Message Queue* and send them to the Elastic Database through a REST call.
 
 ### Elastic Database Component C5
 The Elastic Database will be our No Sql database for storing, searching and analyzing our large volumes of data in near-real-time.
 
+![ElasticKibana](./images/elastic-to-kibana.png?raw=true "ElasticKibana")
+
+
 ### Kibana Component C6
-The Kibana Component is our solution for the data visialization. The data comes from [Elastic Database](#elastic-database-component-c5)
+The Kibana Component is our solution for the data visialization. The data comes from [Elastic Database](#elastic-database-component-c5). Kibana lets users visualize data with charts and graphs in Elasticsearch.
 
 
 
