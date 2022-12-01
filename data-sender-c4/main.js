@@ -1,5 +1,9 @@
-const { ServiceBusClient } = require("@azure/service-bus");
-const { Client } = require('@elastic/elasticsearch');
+const {
+  ServiceBusClient
+} = require("@azure/service-bus");
+const {
+  Client
+} = require('@elastic/elasticsearch');
 const connectionString = "Endpoint=sb://stockinfo.servicebus.windows.net/;SharedAccessKeyName=all;SharedAccessKey=2ypeUYjs322rbphXb62BlWqsvscu2y3nWYK3uSCul7Y=;EntityPath=primary-queue";
 const queueName = "primary-queue";
 
@@ -46,41 +50,60 @@ async function receiveMessages(numberOfMessages) {
 }
 
 async function sendDataToElastic(data) {
+
+  if (data === undefined || data.length === 0) {
+    console.log("Empty data. We don't have what to store in Eleastic");
+    return;
+  }
+
   const indexName = "energy_price";
-  
+
   const client = new Client({
-        node: 'https://openelastic.es.eastus2.azure.elastic-cloud.com:9243',
-        auth: {
-          username: 'elastic',
-          password: 'YvptJOOKMpzZS6ryly54AQpv'
-        }
-    });
+    node: 'https://openelastic.es.eastus2.azure.elastic-cloud.com:9243',
+    auth: {
+      username: 'elastic',
+      password: 'YvptJOOKMpzZS6ryly54AQpv'
+    }
+  });
 
   await client.indices.create({
     index: indexName,
     operations: {
       mappings: {
         properties: {
-          price: { type: 'double' },
-          date: { type: 'date' }
+          price: {
+            type: 'double'
+          },
+          date: {
+            type: 'date'
+          }
         }
       }
     }
-  }, { ignore: [400] })
-    
-  const operations = data.flatMap(doc => [{ index: { _index: indexName } }, doc])
+  }, {
+    ignore: [400]
+  })
 
-  const bulkResponse = await client.bulk({ refresh: true, operations })
-  
+  const operations = data.flatMap(doc => [{
+    index: {
+      _index: indexName
+    }
+  }, doc])
+
+  const bulkResponse = await client.bulk({
+    refresh: true,
+    operations
+  })
+
   console.log(JSON.stringify(bulkResponse));
 }
 
 async function main() {
-    // Receice message from ServiceBus
+  // Receice message from ServiceBus
 
-    const messages = await receiveMessages(1);
-    
-    // Send data to Elastic
+  const messages = await receiveMessages(1);
+
+  // Send data to Elastic
   await sendDataToElastic(messages.flatMap(m => m.body));
 }
 
@@ -88,4 +111,3 @@ main().catch((err) => {
   console.log("Data Sender - Error occurred: ", err);
   process.exit(1);
 });
-
