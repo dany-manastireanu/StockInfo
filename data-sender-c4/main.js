@@ -17,7 +17,7 @@ async function receiveMessages(numberOfMessages) {
     while (allMessages.length < 1) {
       // NOTE: asking for 10 messages does not guarantee that we will return
       // all 10 at once so we must loop until we get all the messages we expected.
-      const messages = await queueReceiver.receiveMessages(10, {
+      const messages = await queueReceiver.receiveMessages(numberOfMessages, {
         maxWaitTimeInMs: 6 * 1000,
       });
 
@@ -75,33 +75,13 @@ async function sendDataToElastic(data) {
   console.log(JSON.stringify(bulkResponse));
 }
 
-function messageToPriceList(messages) {
-  if(messages === undefined || messages.length === 0) {
-    return [];
-  }
-
-  // return messages.map(m => {"price": m.price, "date": m.date});
-}
-
 async function main() {
     // Receice message from ServiceBus
 
-    // const messages = await receiveMessages(1);
+    const messages = await receiveMessages(1);
     
     // Send data to Elastic
-
-  const dataset = [
-    {
-      price: 1.2,
-      date: "2015-01-01T12:00:00Z",
-    },
-    {
-      price: 1.3,
-      date: "2015-01-01T13:00:00Z",
-    } 
-  ];
-
-  await sendDataToElastic(dataset);
+  await sendDataToElastic(messages.flatMap(m => m.body));
 }
 
 main().catch((err) => {
