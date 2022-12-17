@@ -7,8 +7,11 @@
 
 StockInfo application is composed of six components, that are independent between them following the microservice architecture.
 The resasons of choosing the microservice arhitecture and not a monolit was:
+
 1. Improved scalability: Because each microservice is a self-contained unit that performs a specific function, it is easier to scale specific microservices as needed, rather than scaling the entire application as a monolithic unit
+
 2. Enhanced flexibility: Microservices allow organizations to build and deploy applications using a variety of programming languages and tools, rather than being tied to a single technology stack. 
+
 3. Improved resilience and fault tolerance: Because microservices are independently deployable units, if one microservice fails, it can be restarted or replaced without affecting the overall operation of the application.
 
 
@@ -122,13 +125,19 @@ The Kibana Component is our solution for the data visialization. The data comes 
 
 ![ElasticKibana](./images/elastic-to-kibana.png?raw=true "ElasticKibana")
 
-</br></br>
+
 ### Conclusioin
 In conclusion, implementing a microservice architecture for a stock information visualization application can offer a number of benefits, including improved scalability, flexibility, and resilience. By breaking down the application into independently deployable units, it is possible to scale specific microservices as needed to handle increased traffic or demand, and to make changes to individual microservices without affecting the entire application.
-</br></br>
+
+
+
 ### References
 [1] https://www.elastic.co/guide/index.html#viewall
+
 [2] https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview
+
 [3] https://learn.microsoft.com/en-us/azure/?product=popular
+
 [4] https://learn.microsoft.com/en-us/azure/architecture/guide/architecture-styles/microservices
+
 [5] https://www.opcom.ro/acasa/ro
