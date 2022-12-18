@@ -53,12 +53,14 @@ async function extract_data_from_req(server_response)
 	if(pos1 == -1) 
 	{
 		err_handler("token1 not present in OPCOM response");
+		return;
 	}
 	
 	const pos2 = server_response.indexOf(token2,pos1);
 	if(pos2 == -1) 
 	{
 		err_handler("token2 not present in OPCOM response, after token1 position");
+		return;
 	}
 	
 	pos1 += token1.length;
@@ -74,13 +76,13 @@ async function extract_data_from_req(server_response)
 	}
 	catch(e)
 	{
-		error_code("OPCOM response can not be parsed as JSON");
+		err_handler("OPCOM response can not be parsed as JSON");
 		return;
 	}
 	
 	if(typeof extracted_json !='object' || !extracted_json.hasOwnProperty("data") || !Array.isArray(extracted_json.data) || extracted_json.data.length != 24)
 	{
-		error_code("OPCOM response does not have expected format");
+		err_handler("OPCOM response does not have expected format");
 		return;
 	}
 	
@@ -98,7 +100,7 @@ async function extract_data_from_req(server_response)
 		
 		if(extracted_json.data[hour].length != 2)
 		{
-			error_code("OPCOM response does not have expected format");
+			err_handler("OPCOM response does not have expected format");
 			return;
 		}
 		
@@ -141,8 +143,7 @@ async function main()
 	}
 	catch(e)
 	{
-		//request error
-		err_handler(1);
+		err_handler(e);
 	}
 }
 
