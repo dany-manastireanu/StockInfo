@@ -1,0 +1,85 @@
+@font-face 
+{
+	font-family: 'Anydore';
+	src:  url('fonts/Anydore.otf');
+}
+
+@font-face 
+{
+	font-family: 'Qia-display';
+	src:  url('fonts/qia-display.black.ttf');
+}
+
+
+html, body
+{
+	margin:0;
+	padding:0;
+}
+
+#chart
+{
+	position:absolute;
+	top:25vh;
+	left:10vw;
+	width:35vw;
+}
+
+#chart_selector_container
+{
+	position:absolute;
+	font-weight:bold;
+}
+#chart_scale_selector
+{
+	border:1px solid #101010;
+	border-radius:4px;
+	padding:2px;
+	background-color:transparent;
+}
+
+#page_title
+{
+	position:absolute;
+	left:50%;
+	transform:translateX(-50%);
+	top:4vh;
+	font-size:5.2vh;
+	font-weight:bold;
+	font-family: "Qia-display";
+	white-space: nowrap;
+	user-select:none;
+	color:transparent;
+	-webkit-text-stroke:2px black;
+}
+
+#bigdata_mark
+{
+	position:relative;
+	top:-3vh;
+	font-size:3vh;
+	color:red;
+	-webkit-text-stroke:0;
+	font-style:italic;
+	font-family: "Anydore";
+}
+
+#evolution_indicator
+{
+	position:absolute;
+	right:10vw;
+}
+
+#widget_indicator_text
+{
+	position:absolute;
+	bottom:2vh;
+	left:50%;
+	transform:translateX(-50%);
+	
+	font-weight:bold;
+	font-size:2.5vh;
+	
+	user-select:none;
+}
+
