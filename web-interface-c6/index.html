@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Electricity price statistics</title>
+
+    <link href="assets/styles.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
+    
+
+    <script>
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+        )
+      window.Promise ||
+        document.write(
+          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+        )
+    </script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="indicator_widget.js"></script>
+    <script src="functions.js"></script>
+
+    <script src="assets/ohlc.js"></script>
+  </head>
+
+	<body>
+		<span id="page_title">Electricity price statistics in Romania<br/><span id="bigdata_mark">A BigData Project</span></span>
+		<div id="chart_selector_container">
+			<span>Chart scale: </span>
+			<select id="chart_scale_selector" onchange="chart_scale_change_handler();">
+				<option value="day" selected>Today</option>
+				<option value="month">30 days</option>
+			</select>
+		</div>
+	<div id="chart"></div>
+	<div id="evolution_indicator"></div>
+	
+	</body>
+</html>
