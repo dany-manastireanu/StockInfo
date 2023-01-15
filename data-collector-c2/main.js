@@ -22,16 +22,12 @@ async function sendMessage(message) {
     }
 }
 
-//error handler
-//do whatever you want with it
 async function err_handler(err_msg)
 {
 	console.error("Data Collector - Error occurred: " + err_msg);
     	process.exit(1);
 }
 
-//success handler
-//send data to pub/sub or do whatever you want
 async function success_handler(energy_values)
 {
     const message = {
